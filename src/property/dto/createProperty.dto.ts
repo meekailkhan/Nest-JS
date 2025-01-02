@@ -8,9 +8,9 @@ export class CreatePropertyDto {
   @IsString()
   @Length(2, 10, { groups: ['create'] })
   @Length(1, 15, { groups: ['update'] })
-  description: string;
+  readonly description: string;
 
   @IsInt({ always: true })
   @IsPositive()
-  area: number;
+  readonly area: number;
 }

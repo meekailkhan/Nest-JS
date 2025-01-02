@@ -35,7 +35,7 @@ export class PropertyController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIdPipe) id, @Body() body) {
+  update(@Param('id', ParseIdPipe) id, @Body() body:CreatePropertyDto) {
     // body.name = "overwritable";
     // return {id:id,...body}
     return this.propertyService.update(id, body);
