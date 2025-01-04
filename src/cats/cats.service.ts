@@ -8,4 +8,7 @@ export class CatsService {
     findById(id:number){
         return id
     }
+    create(body){
+        return body
+    }
 }

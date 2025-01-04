@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePropertyDto } from './dto/createProperty.dto';
 
 @Injectable()
 export class PropertyService {

@@ -1,7 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, UsePipes } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { ParseIdPipe } from 'src/property/pipes/parseidpipe';
 import { IdParamDto } from 'src/property/dto/idParam.dto';
+import { createCatSchema, createCatsZodDto } from './dto/createCatsZod.dto';
+import { ZodValidationPipe } from './pipes/zodValidationPipe';
 
 @Controller('cats')
 export class CatsController {
@@ -14,6 +16,13 @@ export class CatsController {
     // @Param() params : IdParamDto
     findById(@Param('id',ParseIdPipe) id){
         return this.catsService.findById(id)
+    }
+
+    @Post()
+    @HttpCode(202)
+    @UsePipes(new ZodValidationPipe(createCatSchema))
+    create(@Body() body:createCatsZodDto){
+        return this.catsService.create(body)
     }
 
 }
