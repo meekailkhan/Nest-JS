@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Headers,
   HttpCode,
   Param,
   Post,
@@ -29,7 +30,12 @@ export class CatsController {
   @Post()
   @HttpCode(202)
   @UsePipes(new ZodValidationPipe(createCatSchema))
-  create(@Body() body: createCatsZodDto) {
-    return this.catsService.create(body);
+
+  create(
+    @Body() body: createCatsZodDto,
+    @Headers() headers
+  ) {
+    // return this.catsService.create(body);
+    return headers
   }
 }
