@@ -12,8 +12,6 @@ import { CatsModule } from './cats/cats.module';
 // export class AppModule {}
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-    .apply(PropertyMiddleware)
-    .forRoutes('property')
+    consumer.apply(PropertyMiddleware).forRoutes('property');
   }
 }
