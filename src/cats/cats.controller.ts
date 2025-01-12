@@ -33,9 +33,9 @@ export class CatsController {
 
   create(
     @Body() body: createCatsZodDto,
-    @Headers() headers
+    @Headers('host') host:string
   ) {
     // return this.catsService.create(body);
-    return headers
+    return host
   }
 }
