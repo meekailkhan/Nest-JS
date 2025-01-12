@@ -8,6 +8,7 @@ import {
   HttpCode,
   Query,
   ParseBoolPipe,
+  Headers,
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { ParseIdPipe } from './pipes/parseidpipe';
@@ -35,9 +36,10 @@ export class PropertyController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto) {
+  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto,@Headers('host') host:string) {
     // body.name = "overwritable";
     // return {id:id,...body}
-    return this.propertyService.update(id, body);
+    return host
+    // return this.propertyService.update(id, body);
   }
 }
