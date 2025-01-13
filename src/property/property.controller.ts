@@ -10,12 +10,15 @@ import {
   ParseBoolPipe,
   Headers,
   UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { ParseIdPipe } from './pipes/parseidpipe';
 import { PropertyService } from './property.service';
 import { createZodValidation } from './pipes/createProperZod.pipe';
 import { createPropertySchema } from './dto/zodvalidation.dto';
+import { HeadersDto } from './dto/headers.dto';
+import { RequestHeader } from './pipes/request-header.pipe';
 
 @Controller('property')
 export class PropertyController {
@@ -30,6 +33,7 @@ export class PropertyController {
     return this.propertyService.findById(id, sort);
   }
 
+  
   @Post()
   @UsePipes( new createZodValidation(createPropertySchema))
   @HttpCode(202)
@@ -40,10 +44,10 @@ export class PropertyController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto,@Headers('host') host:string) {
+  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto, @RequestHeader(new ValidationPipe({validateCustomDecorators : true}))@Headers() header:HeadersDto) {
     // body.name = "overwritable";
     // return {id:id,...body}
-    return host
+    return header
     // return this.propertyService.update(id, body);
   }
 }
