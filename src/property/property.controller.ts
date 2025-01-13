@@ -9,10 +9,13 @@ import {
   Query,
   ParseBoolPipe,
   Headers,
+  UsePipes,
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { ParseIdPipe } from './pipes/parseidpipe';
 import { PropertyService } from './property.service';
+import { createZodValidation } from './pipes/createProperZod.pipe';
+import { createPropertySchema } from './dto/zodvalidation.dto';
 
 @Controller('property')
 export class PropertyController {
@@ -28,6 +31,7 @@ export class PropertyController {
   }
 
   @Post()
+  @UsePipes( new createZodValidation(createPropertySchema))
   @HttpCode(202)
   // @UsePipes(new ValidationPipe({whitelist : true,forbidNonWhitelisted:true}))
   // @UsePipes(new ValidationPipe({whitelist : true , forbidNonWhitelisted : true}))
