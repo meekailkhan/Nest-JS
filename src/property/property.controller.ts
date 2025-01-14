@@ -44,7 +44,7 @@ export class PropertyController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto, @RequestHeader(new ValidationPipe({validateCustomDecorators : true}))@Headers() header:HeadersDto) {
+  update(@Param('id', ParseIdPipe) id, @Body() body: CreatePropertyDto, @RequestHeader(new ValidationPipe({whitelist:Boolean(1),validateCustomDecorators : true,forbidNonWhitelisted:false}))@Headers() header:HeadersDto) {
     // body.name = "overwritable";
     // return {id:id,...body}
     return header
