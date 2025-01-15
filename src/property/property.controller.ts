@@ -37,8 +37,8 @@ export class PropertyController {
   @Post()
   @UsePipes( new createZodValidation(createPropertySchema))
   @HttpCode(202)
-  // @UsePipes(new ValidationPipe({whitelist : true,forbidNonWhitelisted:true}))
-  // @UsePipes(new ValidationPipe({whitelist : true , forbidNonWhitelisted : true}))
+  @UsePipes(new ValidationPipe({whitelist : true,forbidNonWhitelisted:true}))
+  @UsePipes(new ValidationPipe({whitelist : true , forbidNonWhitelisted : true}))
   create(@Body() body: CreatePropertyDto) {
     return this.propertyService.create(body);
   }
